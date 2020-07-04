@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dysoco/monkey/repl"
+	"github.com/dsocolobsky/monkey/repl"
 )
 
 func main() {
