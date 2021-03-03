@@ -393,7 +393,6 @@ func TestBooleanExpression(t *testing.T) {
 	}
 }
 
-/*
 func TestIfExpression(t *testing.T) {
 	input := `if (x < y) { x }`
 
@@ -502,6 +501,7 @@ func TestIfElseExpression(t *testing.T) {
 	}
 }
 
+/*
 func TestFunctionLiteralParsing(t *testing.T) {
 	input := `fn(x, y) { x + y; }`
 
