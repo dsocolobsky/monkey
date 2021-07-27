@@ -1,6 +1,7 @@
 package evaluator
 
 import (
+	"fmt"
 	"github.com/dsocolobsky/monkey/lexer"
 	"github.com/dsocolobsky/monkey/object"
 	"github.com/dsocolobsky/monkey/parser"
@@ -45,11 +46,19 @@ func TestEvalBooleanExpression(t *testing.T) {
 		input    string
 		expected bool
 	}{
-		{"true", true},
-		{"false", false},
+		{"true", true}, {"false", false},
+		{"true == true", true}, {"true == false", false}, {"false == false", true},
+		{"true != false", true}, {"true != true", false},
+		{"1 < 2", true}, {"1 > 2", false}, {"2 > 1", true},
+		{"2 < 1", false}, {"-3 > 1", false}, {"-5 > -7", true},
+		{"9 > -15", true},
+		{"1 == 1", true}, {"1 != 1", false}, {"1 != 2", true},
+		{"-4 == -4", true}, {"-4 == 4", false}, {"-4 != 4", true},
+		{"(2 > 4) == false", true}, {"(5 > 1) == true", true}, {"(3 > 1) == (9 > 2)", true},
 	}
 
 	for _, tt := range tests {
+		fmt.Println(tt.input)
 		evaluated := testEval(tt.input)
 		testBooleanObject(t, evaluated, tt.expected)
 	}
