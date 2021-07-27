@@ -3,6 +3,7 @@ package ast
 import (
 	"bytes"
 	"github.com/dsocolobsky/monkey/token"
+	"strings"
 )
 
 type Node interface {
@@ -289,6 +290,41 @@ func (fl *FunctionLiteral) String() string {
 	}
 	out.WriteString(") ")
 	out.WriteString(fl.Body.String())
+
+	return out.String()
+}
+
+/*
+=====================================================================
+===================  CALL EXPRESSIONS= ==============================
+=====================================================================
+*/
+
+type CallExpression struct {
+	Token     token.Token // The '(' token
+	Function  Expression  // Identifier or FunctionLiteral
+	Arguments []Expression
+}
+
+func (ce *CallExpression) expressionNode() {
+}
+
+func (ce *CallExpression) TokenLiteral() string {
+	return ce.Token.Literal
+}
+
+func (ce *CallExpression) String() string {
+	var out bytes.Buffer
+
+	var argStrings []string
+	for _, arg := range ce.Arguments {
+		argStrings = append(argStrings, arg.String())
+	}
+
+	out.WriteString(ce.Function.String())
+	out.WriteString("(")
+	out.WriteString(strings.Join(argStrings, ","))
+	out.WriteString(")")
 
 	return out.String()
 }
