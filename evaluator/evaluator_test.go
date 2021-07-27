@@ -19,6 +19,12 @@ func TestEvalIntegerExpression(t *testing.T) {
 		{"-10", -10},
 		{"--5", 5},
 		{"---5", -5},
+		{"10 + 10 - 2", 18},
+		{"8 - 9", -1},
+		{"3 + 2 * 4", 11},
+		{"8 * 4 / 2", 16},
+		{"3 * (2 + 1) * -1", -9},
+		{"(2 + (9 * 2) - -1*(13 * 1 * 5) + 1 + 3 + 1) / 9", 10},
 	}
 
 	for _, tt := range tests {
@@ -30,7 +36,7 @@ func TestEvalIntegerExpression(t *testing.T) {
 func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
 	result, ok := obj.(*object.Integer)
 	assert.True(t, ok)
-	assert.Equal(t, result.Value, expected)
+	assert.Equal(t, expected, result.Value)
 	return true
 }
 
@@ -68,7 +74,7 @@ func TestBangOperator(t *testing.T) {
 func testBooleanObject(t *testing.T, obj object.Object, expected bool) bool {
 	result, ok := obj.(*object.Boolean)
 	assert.True(t, ok)
-	assert.Equal(t, result.Value, expected)
+	assert.Equal(t, expected, result.Value)
 	return true
 }
 
