@@ -4,6 +4,7 @@ import (
 	"github.com/dsocolobsky/monkey/lexer"
 	"github.com/dsocolobsky/monkey/object"
 	"github.com/dsocolobsky/monkey/parser"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -12,7 +13,7 @@ func TestEvalIntegerExpression(t *testing.T) {
 		input    string
 		expected int64
 	}{
-		{"5", 5},
+		{"5", 2},
 		{"10", 10},
 	}
 
@@ -32,15 +33,7 @@ func testEval(input string) object.Object {
 
 func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
 	result, ok := obj.(*object.Integer)
-	if !ok {
-		t.Errorf("object is not Integer got=%T (%+v)", obj, obj)
-		return false
-	}
-
-	if result.Value != expected {
-		t.Errorf("object has wrong value, got=%d, want=%d", result.Value, expected)
-		return false
-	}
-
+	assert.True(t, ok)
+	assert.Equal(t, result.Value, expected)
 	return true
 }
