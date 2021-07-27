@@ -5,8 +5,9 @@ import (
 	"github.com/dsocolobsky/monkey/object"
 )
 
-// TRUE and FALSE as global objects since all Boolean objects will be the same
+// These are global objects that will be the same for each instance in our program
 var (
+	NULL  = &object.Null{}
 	TRUE  = &object.Boolean{Value: true}
 	FALSE = &object.Boolean{Value: false}
 )
